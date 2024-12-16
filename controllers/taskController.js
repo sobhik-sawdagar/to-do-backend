@@ -3,13 +3,13 @@ const Tasks = require("../models/taskSchema.js");
 //Create a new task
 exports.createTask = async (req, res) => {
   try {
-    const { title, description, dueDate } = req.body;
+    const { title, description, status, dueDate } = req.body;
 
     if (!title) {
       return res.status(400).json({ error: "Task title is required" });
     }
 
-    const task = new Tasks({ title, description, dueDate });
+    const task = new Tasks({ title, description, status, dueDate });
     await task.save();
     console.log("Task created successfully", task);
     res.status(201).json(task);
